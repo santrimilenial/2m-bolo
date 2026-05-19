@@ -1,0 +1,137 @@
+nohup: ignoring input
+
+> public_html@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.35
+  - Environments: .env
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Skipping linting
+   Checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/40) ...
+   Generating static pages (10/40) 
+Error calculating dashboard: B [Error]: Dynamic server usage: Route /api/monitoring-dashboard couldn't be rendered statically because it used `request.url`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at V (/home/1m.clicco.co.id/public_html/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:21778)
+    at Object.get (/home/1m.clicco.co.id/public_html/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:29465)
+    at u (/home/1m.clicco.co.id/public_html/.next/server/app/api/monitoring-dashboard/route.js:1:614)
+    at /home/1m.clicco.co.id/public_html/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+    at /home/1m.clicco.co.id/public_html/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+    at NoopContextManager.with (/home/1m.clicco.co.id/public_html/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+    at ContextAPI.with (/home/1m.clicco.co.id/public_html/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+    at NoopTracer.startActiveSpan (/home/1m.clicco.co.id/public_html/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+    at ProxyTracer.startActiveSpan (/home/1m.clicco.co.id/public_html/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+    at /home/1m.clicco.co.id/public_html/node_modules/next/dist/server/lib/trace/tracer.js:122:103 {
+  description: "Route /api/monitoring-dashboard couldn't be rendered statically because it used `request.url`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error in Cashflow Monitoring API: B [Error]: Dynamic server usage: Route /api/monitoring/cashflow couldn't be rendered statically because it used `request.url`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at V (/home/1m.clicco.co.id/public_html/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:21778)
+    at Object.get (/home/1m.clicco.co.id/public_html/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:29465)
+    at c (/home/1m.clicco.co.id/public_html/.next/server/app/api/monitoring/cashflow/route.js:1:614)
+    at /home/1m.clicco.co.id/public_html/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+    at /home/1m.clicco.co.id/public_html/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+    at NoopContextManager.with (/home/1m.clicco.co.id/public_html/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+    at ContextAPI.with (/home/1m.clicco.co.id/public_html/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+    at NoopTracer.startActiveSpan (/home/1m.clicco.co.id/public_html/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+    at ProxyTracer.startActiveSpan (/home/1m.clicco.co.id/public_html/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+    at /home/1m.clicco.co.id/public_html/node_modules/next/dist/server/lib/trace/tracer.js:122:103 {
+  description: "Route /api/monitoring/cashflow couldn't be rendered statically because it used `request.url`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+   Generating static pages (20/40) 
+   Generating static pages (30/40) 
+ ✓ Generating static pages (40/40)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+┌ ○ /                                    4.18 kB        91.4 kB
+├ ○ /_not-found                          873 B          88.1 kB
+├ ○ /akun-iklan                          5.42 kB        92.7 kB
+├ ƒ /api/ad-spend                        0 B                0 B
+├ ƒ /api/akun-iklan                      0 B                0 B
+├ ƒ /api/akun-iklan/[id]                 0 B                0 B
+├ ƒ /api/akun-iklan/topup                0 B                0 B
+├ ƒ /api/arus-modal                      0 B                0 B
+├ ƒ /api/auth/login                      0 B                0 B
+├ ƒ /api/auth/logout                     0 B                0 B
+├ ƒ /api/auth/session                    0 B                0 B
+├ ƒ /api/banks                           0 B                0 B
+├ ƒ /api/beban                           0 B                0 B
+├ ƒ /api/budget                          0 B                0 B
+├ ƒ /api/cash                            0 B                0 B
+├ ƒ /api/cash/[id]                       0 B                0 B
+├ ƒ /api/cash/bulk                       0 B                0 B
+├ ƒ /api/cash/bulk/template              0 B                0 B
+├ ƒ /api/cashflow-assumption             0 B                0 B
+├ ƒ /api/categories                      0 B                0 B
+├ ƒ /api/debt                            0 B                0 B
+├ ƒ /api/debt/[id]                       0 B                0 B
+├ ƒ /api/debt/mutation                   0 B                0 B
+├ ƒ /api/debt/mutation/[id]              0 B                0 B
+├ ƒ /api/file/[...path]                  0 B                0 B
+├ ƒ /api/laporan                         0 B                0 B
+├ ƒ /api/monitoring-assumption           0 B                0 B
+├ ƒ /api/monitoring-dashboard            0 B                0 B
+├ ƒ /api/monitoring/cashflow             0 B                0 B
+├ ƒ /api/products                        0 B                0 B
+├ ƒ /api/products/[id]                   0 B                0 B
+├ ƒ /api/products/stock                  0 B                0 B
+├ ƒ /api/sales-log                       0 B                0 B
+├ ƒ /api/sales-log-cash                  0 B                0 B
+├ ƒ /api/sales-source                    0 B                0 B
+├ ƒ /api/sales-source/[id]               0 B                0 B
+├ ƒ /api/upload                          0 B                0 B
+├ ƒ /api/users                           0 B                0 B
+├ ƒ /api/users/[id]                      0 B                0 B
+├ ○ /arus-modal                          4.54 kB        91.8 kB
+├ ○ /beban                               5.44 kB        92.7 kB
+├ ○ /budgeting                           4.12 kB        91.4 kB
+├ ○ /cash                                124 kB          211 kB
+├ ○ /cashflow                            74 kB           161 kB
+├ ○ /laporan                             4.73 kB          92 kB
+├ ○ /laporan-iklan                       5.36 kB        92.6 kB
+├ ○ /laporan-penjualan                   3.5 kB         90.8 kB
+├ ○ /login                               8.61 kB        95.9 kB
+├ ○ /monitoring                          4.45 kB        91.7 kB
+├ ○ /monitoring/cashflow                 4.06 kB        91.3 kB
+├ ○ /penjualan                           4.78 kB          92 kB
+├ ○ /persediaan                          4.84 kB        92.1 kB
+├ ○ /sales-log-cash                      3.95 kB        91.2 kB
+├ ○ /users                               2.88 kB        99.6 kB
+├ ƒ /users/[id]/permissions              2.44 kB        99.2 kB
+└ ○ /utang-piutang                       6.3 kB         93.6 kB
++ First Load JS shared by all            87.3 kB
+  ├ chunks/117-ac734a4d5ca2fa02.js       31.7 kB
+  ├ chunks/fd9d1056-fdb86b7f4ab1895f.js  53.6 kB
+  └ other shared chunks (total)          1.89 kB
+
+
+ƒ Middleware                             32.7 kB
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+
+> public_html@0.1.0 start
+> next start
+
+ ⨯ Failed to start server
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+    at listenInCluster (node:net:1965:12)
+    at Server.listen (node:net:2067:7)
+    at /home/1m.clicco.co.id/public_html/node_modules/next/dist/server/lib/start-server.js:280:16
+    at new Promise (<anonymous>)
+    at startServer (/home/1m.clicco.co.id/public_html/node_modules/next/dist/server/lib/start-server.js:191:11)
+    at Module.nextStart (/home/1m.clicco.co.id/public_html/node_modules/next/dist/cli/next-start.js:25:40)
+    at /home/1m.clicco.co.id/public_html/node_modules/next/dist/bin/next:105:856 {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}

@@ -1,0 +1,212 @@
+[
+  {
+    id: 'c59f06a9-3d92-47ea-b1eb-fe6dd71a740d',
+    name: 'TERTAHAN DI PIUTANG',
+    type: 'PIUTANG',
+    isDeleted: false,
+    createdAt: 2026-04-16T06:14:31.901Z,
+    updatedAt: 2026-04-16T06:14:31.901Z,
+    mutations: [
+      {
+        id: 'ecdb54a6-c663-4694-ac63-e2aa6040dd97',
+        entityId: 'c59f06a9-3d92-47ea-b1eb-fe6dd71a740d',
+        date: 2026-04-04T00:00:00.000Z,
+        amount: 139190933,
+        type: 'PAYMENT',
+        description: 'Auto-Sync by Jurnal',
+        cashTransactionId: '0674c024-3a34-4bd2-8a53-868b6239903c',
+        createdAt: 2026-04-16T06:14:31.910Z,
+        updatedAt: 2026-04-16T06:14:31.910Z
+      }
+    ]
+  },
+  {
+    id: '569f480a-55ee-4134-a6a0-c1a335c68505',
+    name: 'MAS ALI FIRYADIANSYAH',
+    type: 'PIUTANG',
+    isDeleted: false,
+    createdAt: 2026-04-16T06:14:31.913Z,
+    updatedAt: 2026-04-16T06:14:31.913Z,
+    mutations: [
+      {
+        id: 'f73e5b61-8215-4a7d-94a9-a92dfb5db6a1',
+        entityId: '569f480a-55ee-4134-a6a0-c1a335c68505',
+        date: 2026-04-04T00:00:00.000Z,
+        amount: 4000000,
+        type: 'ADD_DEBT',
+        description: 'Auto-Sync by Jurnal',
+        cashTransactionId: 'eb962a7c-c137-4883-be46-2a950057fd49',
+        createdAt: 2026-04-16T06:14:31.919Z,
+        updatedAt: 2026-04-16T06:14:31.919Z
+      }
+    ]
+  },
+  {
+    id: '1ef2eee8-36f3-4a66-afde-472ad13616d9',
+    name: 'MAS MIRZA',
+    type: 'PIUTANG',
+    isDeleted: false,
+    createdAt: 2026-04-16T06:14:31.920Z,
+    updatedAt: 2026-04-16T06:14:31.920Z,
+    mutations: [
+      {
+        id: '43ebf4ff-6f20-4107-bbdf-c51c17934f07',
+        entityId: '1ef2eee8-36f3-4a66-afde-472ad13616d9',
+        date: 2026-04-04T00:00:00.000Z,
+        amount: 85819916,
+        type: 'ADD_DEBT',
+        description: 'Auto-Sync by Jurnal',
+        cashTransactionId: '10668a99-8583-4c87-99f6-a90e6d068ab7',
+        createdAt: 2026-04-16T06:14:31.922Z,
+        updatedAt: 2026-04-16T06:14:31.922Z
+      }
+    ]
+  },
+  {
+    id: '031ae81e-3d76-4799-b8b3-2ddf14b57dd3',
+    name: 'KAKAK MAS MIRZA',
+    type: 'PIUTANG',
+    isDeleted: false,
+    createdAt: 2026-04-16T06:14:31.924Z,
+    updatedAt: 2026-04-16T06:14:31.924Z,
+    mutations: [
+      {
+        id: 'b816c03e-be6a-45b0-8c8b-ff283ec6fc51',
+        entityId: '031ae81e-3d76-4799-b8b3-2ddf14b57dd3',
+        date: 2026-04-04T00:00:00.000Z,
+        amount: 6821017,
+        type: 'ADD_DEBT',
+        description: 'Auto-Sync by Jurnal',
+        cashTransactionId: '7dc2ada6-adee-4fca-acc8-f0f4bfed142a',
+        createdAt: 2026-04-16T06:14:31.927Z,
+        updatedAt: 2026-04-16T06:14:31.927Z
+      }
+    ]
+  },
+  {
+    id: 'c4562f73-9017-4356-8b3b-6ac5a2b1ec52',
+    name: 'MAS SULTON',
+    type: 'PIUTANG',
+    isDeleted: false,
+    createdAt: 2026-04-16T06:14:31.929Z,
+    updatedAt: 2026-04-16T06:14:31.929Z,
+    mutations: [
+      {
+        id: '021857f5-4320-4922-b9de-2e1d37f4ea9c',
+        entityId: 'c4562f73-9017-4356-8b3b-6ac5a2b1ec52',
+        date: 2026-04-04T00:00:00.000Z,
+        amount: 3000000,
+        type: 'ADD_DEBT',
+        description: 'Auto-Sync by Jurnal',
+        cashTransactionId: '92f8b3df-8286-4071-83a5-5d471a4f7f59',
+        createdAt: 2026-04-16T06:14:31.931Z,
+        updatedAt: 2026-04-16T06:14:31.931Z
+      }
+    ]
+  },
+  {
+    id: '41edbbf4-24b5-4619-9aff-315870276155',
+    name: 'MAS FITRIYANTO',
+    type: 'PIUTANG',
+    isDeleted: false,
+    createdAt: 2026-04-16T06:14:31.933Z,
+    updatedAt: 2026-04-16T06:14:31.933Z,
+    mutations: [
+      {
+        id: '58f0ac2c-9f20-4700-9d3b-a65ae1bf23ba',
+        entityId: '41edbbf4-24b5-4619-9aff-315870276155',
+        date: 2026-04-04T00:00:00.000Z,
+        amount: 1550000,
+        type: 'ADD_DEBT',
+        description: 'Auto-Sync by Jurnal',
+        cashTransactionId: 'd12e9b32-3f84-46e2-bea3-88171825b758',
+        createdAt: 2026-04-16T06:14:31.934Z,
+        updatedAt: 2026-04-16T06:14:31.934Z
+      }
+    ]
+  },
+  {
+    id: 'd8595e47-e109-40b0-87d6-747ac9bf4759',
+    name: 'NUR FITRIYANI',
+    type: 'PIUTANG',
+    isDeleted: false,
+    createdAt: 2026-04-16T06:14:31.936Z,
+    updatedAt: 2026-04-16T06:14:31.936Z,
+    mutations: [
+      {
+        id: '29506a35-f1dd-4c35-b974-bfb1f2820aa9',
+        entityId: 'd8595e47-e109-40b0-87d6-747ac9bf4759',
+        date: 2026-04-04T00:00:00.000Z,
+        amount: 7000000,
+        type: 'ADD_DEBT',
+        description: 'Auto-Sync by Jurnal',
+        cashTransactionId: 'ff047dd7-ecb2-484a-80df-f66d53ebfe41',
+        createdAt: 2026-04-16T06:14:31.937Z,
+        updatedAt: 2026-04-16T06:14:31.937Z
+      }
+    ]
+  },
+  {
+    id: '120c3d4a-f542-4d58-8eb3-6782019130de',
+    name: 'KAKAK MELLI',
+    type: 'PIUTANG',
+    isDeleted: false,
+    createdAt: 2026-04-16T06:14:31.938Z,
+    updatedAt: 2026-04-16T06:14:31.938Z,
+    mutations: [
+      {
+        id: 'b6062974-331a-4a50-affa-45feb20f8c7a',
+        entityId: '120c3d4a-f542-4d58-8eb3-6782019130de',
+        date: 2026-04-04T00:00:00.000Z,
+        amount: 20000000,
+        type: 'ADD_DEBT',
+        description: 'Auto-Sync by Jurnal',
+        cashTransactionId: '92449f43-7bf8-4919-95e4-28c1b6bed80e',
+        createdAt: 2026-04-16T06:14:31.940Z,
+        updatedAt: 2026-04-16T06:14:31.940Z
+      }
+    ]
+  },
+  {
+    id: '2fd119b3-639a-41c9-bd77-43e15ca98dce',
+    name: 'IKA SETYO RINI',
+    type: 'PIUTANG',
+    isDeleted: false,
+    createdAt: 2026-04-16T06:14:31.941Z,
+    updatedAt: 2026-04-16T06:14:31.941Z,
+    mutations: [
+      {
+        id: 'ed039f6e-dc9e-4d04-88f3-f61a2a00f34d',
+        entityId: '2fd119b3-639a-41c9-bd77-43e15ca98dce',
+        date: 2026-04-04T00:00:00.000Z,
+        amount: 1000000,
+        type: 'ADD_DEBT',
+        description: 'Auto-Sync by Jurnal',
+        cashTransactionId: 'a5167c78-ab1b-467d-829d-7a1f678e0130',
+        createdAt: 2026-04-16T06:14:31.943Z,
+        updatedAt: 2026-04-16T06:14:31.943Z
+      }
+    ]
+  },
+  {
+    id: 'ac06fd76-c76a-4b8b-b28b-21bf11a32b5b',
+    name: 'SODARA MAS MIRZA',
+    type: 'PIUTANG',
+    isDeleted: false,
+    createdAt: 2026-04-16T06:14:31.944Z,
+    updatedAt: 2026-04-16T06:14:31.944Z,
+    mutations: [
+      {
+        id: '3fcafeac-41ca-49a6-9536-d3d70acaa330',
+        entityId: 'ac06fd76-c76a-4b8b-b28b-21bf11a32b5b',
+        date: 2026-04-04T00:00:00.000Z,
+        amount: 10000000,
+        type: 'ADD_DEBT',
+        description: 'Auto-Sync by Jurnal',
+        cashTransactionId: 'b626a4cb-141b-4d68-a883-949cddb60eed',
+        createdAt: 2026-04-16T06:14:31.946Z,
+        updatedAt: 2026-04-16T06:14:31.946Z
+      }
+    ]
+  }
+]

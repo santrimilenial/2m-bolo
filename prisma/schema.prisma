@@ -1,0 +1,346 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  username     String   @unique
+  password     String
+  role         Role     @default(OWNER)
+  accessConfig Json?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  STAFF
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
+
+enum DebtType {
+  HUTANG
+  PIUTANG
+}
+
+enum DebtMutationType {
+  ADD_DEBT
+  PAYMENT
+}
+
+enum CategoryType {
+  INCOME
+  EXPENSE
+}
+
+
+model CashTransaction {
+  id              String           @id @default(uuid())
+  date            DateTime
+  description     String
+  
+  bankAccountId   String
+  rekening        BankAccount      @relation(fields: [bankAccountId], references: [id])
+  
+  categoryId      String
+  category        Category         @relation("CategoryRelation", fields: [categoryId], references: [id])
+  
+  subCategoryId   String?
+  subCategory     SubCategory?     @relation("SubCategoryRelation", fields: [subCategoryId], references: [id])
+  
+  type            TransactionType
+  amount          Float
+  proofUrl        String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  
+  debtMutation    DebtMutation?
+}
+
+model BankAccount {
+  id               String            @id @default(uuid())
+  name             String            @unique
+  realBalance      Float             @default(0)
+  isDeleted        Boolean           @default(false)
+  updatedAt        DateTime          @updatedAt
+  CashTransactions CashTransaction[]
+}
+
+model Category {
+  id               String            @id @default(uuid())
+  name             String            @unique
+  type             CategoryType
+  isDeleted        Boolean           @default(false)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  MainTransactions CashTransaction[] @relation("CategoryRelation")
+  subCategories    SubCategory[]     @relation("ParentChild")
+  budgets          Budget[]          @relation("CategoryBudget")
+}
+
+model SubCategory {
+  id               String            @id @default(uuid())
+  name             String
+  categoryId       String
+  category         Category          @relation("ParentChild", fields: [categoryId], references: [id])
+  isDeleted        Boolean           @default(false)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  SubTransactions  CashTransaction[] @relation("SubCategoryRelation")
+  budgets          Budget[]          @relation("SubCategoryBudget")
+}
+
+model DebtEntity {
+  id               String            @id @default(uuid())
+  name             String
+  type             DebtType
+  isDeleted        Boolean           @default(false)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  mutations        DebtMutation[]
+}
+
+model DebtMutation {
+  id                String            @id @default(uuid())
+  entityId          String
+  entity            DebtEntity        @relation(fields: [entityId], references: [id])
+  date              DateTime
+  amount            Float
+  type              DebtMutationType
+  description       String
+  
+  cashTransactionId String?           @unique
+  cashTransaction   CashTransaction?  @relation(fields: [cashTransactionId], references: [id], onDelete: SetNull)
+  
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+}
+
+// --- MODUL 1: INVENTORI ---
+model Product {
+  id          String      @id @default(uuid())
+  sku         String      @unique
+  name        String      
+  stock       Int         @default(0)   // Stok fisik Gudang
+  price       Float       @default(0)   // Harga Jual
+  cogs        Float       @default(0)   // Harga Modal/HPP
+  isDeleted   Boolean     @default(false)
+  salesItems  SalesItem[]
+  adSpendItems AdSpendItem[]
+  cashSalesItems CashSalesItem[]
+  mutations   StockMutation[]
+}
+
+model StockMutation {
+  id          String    @id @default(uuid())
+  productId   String
+  product     Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  date        DateTime
+  qty         Int
+  type        String    // "ADD", "SUBTRACT"
+  description String?
+  createdAt   DateTime  @default(now())
+}
+
+// --- MODUL MASTER ---
+model SalesSource {
+  id          String       @id @default(uuid())
+  name        String       @unique // "FB ADS", "SHOPEE", dll
+  salesLogs   SalesLog[]
+  adSpends    AdSpendLog[]
+  adAccounts  AdAccount[]
+  cashSalesLogs CashSalesLog[]
+}
+
+// --- MODUL 2: PENJUALAN ---
+model SalesLog {
+  id          String      @id @default(uuid())
+  date        DateTime    // Tanggal Transaksi
+  sourceId    String      
+  source      SalesSource @relation(fields: [sourceId], references: [id])
+  isZeroSales Boolean     @default(false) // Flag jika "hari ini 0 penjualan"
+  items       SalesItem[]
+  
+  @@unique([date, sourceId]) // 1 Sumber hanya punya 1 record per hari
+}
+
+model SalesItem {
+  id          String      @id @default(uuid())
+  salesLogId  String
+  salesLog    SalesLog    @relation(fields: [salesLogId], references: [id], onDelete: Cascade)
+  productId   String
+  product     Product     @relation(fields: [productId], references: [id])
+  qty         Int         // Jumlah closing. Saat disave, memotong Product.stock
+  priceAtSale Float       // Snapshot harga jual saat itu
+  cogsAtSale  Float       // Snapshot HPP saat itu
+  diskonOngkir Float      @default(0) // Diskon ongkir per produk
+}
+
+// --- MODUL 3: IKLAN ---
+model AdAccount {
+  id          String      @id @default(uuid())
+  sourceId    String      
+  source      SalesSource @relation(fields: [sourceId], references: [id])
+  
+  groupName   String      // (BM / BC / USERNAME email)
+  accountName String      // (Nama Akun Iklan / Nama Toko)
+  productInfo String      // (Daftar produk, cnth: "MD, WJ, KP")
+  status      String      @default("ON") // "ON", "OFF", "AKUN DI BATASI"
+  
+  adSpendItems AdSpendItem[]
+  topUps       AdAccountTopUp[]
+  
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model AdAccountTopUp {
+  id          String      @id @default(uuid())
+  date        DateTime    
+  adAccountId String
+  adAccount   AdAccount   @relation(fields: [adAccountId], references: [id], onDelete: Cascade)
+  amount      Float
+  description String?
+  createdAt   DateTime    @default(now())
+}
+
+model AdSpendLog {
+  id          String      @id @default(uuid())
+  date        DateTime    
+  sourceId    String      
+  source      SalesSource @relation(fields: [sourceId], references: [id])
+  
+  amountSpent Float       // Total Biaya Iklan (Rp) hari itu
+  items       AdSpendItem[]
+  
+  @@unique([date, sourceId])
+}
+
+model AdSpendItem {
+  id           String      @id @default(uuid())
+  adSpendLogId String
+  log          AdSpendLog  @relation(fields: [adSpendLogId], references: [id], onDelete: Cascade)
+  
+  productId    String
+  product      Product     @relation(fields: [productId], references: [id])
+  
+  adAccountId  String?
+  adAccount    AdAccount?  @relation(fields: [adAccountId], references: [id])
+  
+  jumlahAi     Int         @default(0)   // Jumlah AI
+  amountSpent  Float       // Biaya Iklan (Rp) untuk produk ini
+  form         Int         @default(0)   // Jumlah lead masuk
+  pembelian    Int         @default(0)   // Jumlah closing
+}
+
+// --- MODUL 4: ALL MONITORING (SETTING ASUMSI) ---
+model MonitoringAssumption {
+  id               String   @id @default(uuid())
+  month            Int      // 1-12
+  year             Int      // 2026
+  
+  // Beban Statis Bulanan (Akan dibagi 30/31 di UI)
+  gapok            Float    // Asumsi Gaji Pokok
+  bebanLain        Float    // Asumsi Operasional Lain
+  
+  // Beban Variabel
+  feeCsPerPcs      Float    // Fee CS per Closing
+  biayaReturPerPcs Float    // Ongkir paket balik
+  
+  // Skenario Persentase Retur (RTS)
+  rtsRate1         Float    // misal 45 (45%)
+  rtsRate2         Float    // misal 25 (25%)
+  rtsRate3         Float    // misal 10 (10%)
+  
+  updatedAt        DateTime   @updatedAt
+  @@unique([month, year])
+}
+
+// --- MODUL 5: BUDGETING ---
+model Budget {
+  id              String       @id @default(uuid())
+  month           Int          
+  year            Int          
+  
+  categoryId      String
+  category        Category     @relation("CategoryBudget", fields: [categoryId], references: [id], onDelete: Cascade)
+  
+  subCategoryId   String?
+  subCategory     SubCategory? @relation("SubCategoryBudget", fields: [subCategoryId], references: [id], onDelete: Cascade)
+  
+  amount          Float        @default(0)
+  
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@unique([month, year, categoryId, subCategoryId])
+}
+
+// --- MODUL: CASHFLOW MONITORING ---
+model CashSalesLog {
+  id          String      @id @default(uuid())
+  date        DateTime    // Tanggal cair
+  sourceId    String      
+  source      SalesSource @relation(fields: [sourceId], references: [id])
+  
+  qty         Int         @default(0)   // Jumlah paket cair (cache dari items)
+  amount      Float       @default(0)   // Nilai Omset Cair (Rp) (cache dari items)
+  
+  items       CashSalesItem[]
+  
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  
+  @@unique([date, sourceId]) // 1 sumber pencairan hanya punya 1 record per hari
+}
+
+model CashSalesItem {
+  id              String       @id @default(uuid())
+  cashSalesLogId  String
+  cashSalesLog    CashSalesLog @relation(fields: [cashSalesLogId], references: [id], onDelete: Cascade)
+  
+  productId       String
+  product         Product      @relation(fields: [productId], references: [id])
+  
+  qty             Int          @default(0)
+  amount          Float        @default(0)
+}
+
+model CashflowAssumption {
+  id               String   @id @default(uuid())
+  month            Int      // 1-12
+  year             Int      // 2026
+  
+  hppPerPcs        Float    @default(0)
+  feeCsPerPcs      Float    @default(0)
+  feePackingPerPcs Float    @default(0)
+  
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@unique([month, year])
+}
+
+// --- MODUL 6: INVENTARIS / ASSETS ---
+model Asset {
+  id          String   @id @default(uuid())
+  date        DateTime // Tanggal
+  description String   // Keterangan / Nama Barang
+  qty         Int      // Total Unit
+  unitPrice   Float    // Harga Perolehan @
+  totalPrice  Float    // Jumlah (qty * unitPrice)
+  holder      String?  // Pemegang
+  isDeleted   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

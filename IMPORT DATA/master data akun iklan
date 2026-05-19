@@ -1,0 +1,157 @@
+BEGIN;
+
+DO $$
+DECLARE
+  missing_sources TEXT;
+BEGIN
+  SELECT STRING_AGG(src.name, ', ')
+  INTO missing_sources
+  FROM (
+    VALUES
+      ('FB ADS'),
+      ('GOOGLE ADS'),
+      ('MP - LAZADA'),
+      ('MP - SHOPEE'),
+      ('MP - TIKTOK TOKOPEDIA'),
+      ('SNACK ADS')
+  ) AS src(name)
+  WHERE NOT EXISTS (
+    SELECT 1 FROM "SalesSource" ss WHERE ss."name" = src.name
+  );
+
+  IF missing_sources IS NOT NULL THEN
+    RAISE EXCEPTION 'SalesSource belum ada: %', missing_sources;
+  END IF;
+END $$;
+
+CREATE TEMP TABLE tmp_ad_accounts_migration (
+  source_name TEXT NOT NULL,
+  group_name TEXT NOT NULL,
+  account_name TEXT NOT NULL,
+  product_info TEXT NOT NULL,
+  status TEXT NOT NULL
+) ON COMMIT DROP;
+
+INSERT INTO tmp_ad_accounts_migration
+  (source_name, group_name, account_name, product_info, status)
+VALUES
+('FB ADS', 'Anisa-1', 'ADS-Anisa-1', '', 'AKUN DI BATASI'),
+('FB ADS', 'Anisa-1', 'ADS-Anisa-2', '', 'OFF'),
+('FB ADS', 'Anisa-1', 'ADS-Anisa-3', '', 'OFF'),
+('FB ADS', 'Nirmala ID 03', 'AH001', 'WJ', 'ON'),
+('FB ADS', 'Ahmad Hendri Hendri3209', 'AHOO1', 'WJ', 'ON'),
+('FB ADS', 'Ahmad Hendri Hendri3209', 'AHOO2', '', 'AKUN DI BATASI'),
+('FB ADS', 'Ahmad Hendri Hendri3209', 'AHOO3', '', 'AKUN DI BATASI'),
+('FB ADS', 'Bismillah Bisa', 'BISA1', '', 'AKUN DI BATASI'),
+('FB ADS', 'Bismillah Bisa', 'BISA2', '', 'AKUN DI BATASI'),
+('FB ADS', 'Bismillah Bisa', 'BISA3', '', 'AKUN DI BATASI'),
+('FB ADS', 'CV Clicco Niroga', 'DokterSyaraf1', 'MD', 'OFF'),
+('FB ADS', 'Kp Herbal', 'KpHerbal001', '', 'AKUN DI BATASI'),
+('FB ADS', 'Kp Herbal', 'KpHerbal002', '', 'AKUN DI BATASI'),
+('FB ADS', 'Kp Herbal', 'KpHerbal003', 'MD, WJ', 'OFF'),
+('FB ADS', 'Kp Herbal', 'KpHerbal004', '', 'AKUN DI BATASI'),
+('FB ADS', 'Kp Herbal', 'KpHerbal005', '', 'AKUN DI BATASI'),
+('FB ADS', 'CV Clicco Niroga', 'OO-10042-CliccoOfficial', 'MD', 'ON'),
+('FB ADS', 'CV Clicco Niroga', 'OO-10616-CliccoOfficial', 'MD', 'ON'),
+('FB ADS', 'CV Clicco Niroga', 'OO-10617-CliccoOfficial', 'WJ', 'ON'),
+('FB ADS', 'CV Clicco Niroga', 'OO-10618-CliccoOfficial', 'MD', 'ON'),
+('FB ADS', 'CV Clicco Niroga', 'OO-11435-CliccoOfficial', 'VC', 'ON'),
+('FB ADS', 'CV Clicco Niroga', 'OO-11924-CliccoOfficial', '', 'OFF'),
+('FB ADS', 'CV Clicco Niroga', 'OO-11926-CliccoOfficial', '', 'OFF'),
+('FB ADS', 'CV Clicco Niroga', 'OO-11934-CliccoOfficial', '', 'OFF'),
+('FB ADS', 'CV Clicco Niroga', 'OO-11970-CliccoOfficial', 'VC', 'ON'),
+('FB ADS', 'CV Clicco Niroga', 'OO-12206-CliccoOfficial', '', 'OFF'),
+('FB ADS', 'CV Clicco Niroga', 'OO-12214-CliccoOfficial', '', 'OFF'),
+('FB ADS', 'CV Clicco Niroga', 'OO-12240-CliccoOfficial', '', 'OFF'),
+('FB ADS', 'CV Clicco Niroga', 'OO-12322-CliccoOfficial', '', 'OFF'),
+('FB ADS', 'CV Clicco Niroga', 'OO-22993-CliccoOfficial', '', 'OFF'),
+('FB ADS', 'CV Clicco Niroga', 'OO-361-CliccoOfficial-05', 'MD', 'ON'),
+('FB ADS', 'CV Clicco Niroga', 'OO-363-CliccoOfficial-03', 'MD', 'ON'),
+('FB ADS', 'CV Clicco Niroga', 'OO-364-CliccoOfficial-04', 'MD', 'ON'),
+('FB ADS', 'CV Clicco Niroga', 'OO-395-CliccoOfficial-02', 'VC', 'ON'),
+('FB ADS', 'Pitri Mariyani3292', 'PM001', 'WJ', 'ON'),
+('FB ADS', 'Pitri Mariyani3292', 'PM002', 'MD, KP', 'OFF'),
+('FB ADS', 'Pitri Pitri', 'Pitri001', 'WJ', 'AKUN DI BATASI'),
+('FB ADS', 'Pitri Pitri', 'Pitri002', '', 'OFF'),
+('FB ADS', 'Pitri Pitri', 'Pitri003', 'WJ', 'AKUN DI BATASI'),
+('FB ADS', 'Restahulu Njsy', 'RESTAHULU01', 'MD', 'OFF'),
+('FB ADS', 'Restahulu Njsy', 'RESTAHULU02', 'MD', 'AKUN DI BATASI'),
+('FB ADS', 'Restahulu Njsy', 'RESTAHULU03', '', 'OFF'),
+('FB ADS', 'Restahulu Njsy', 'RESTAHULU04', '', 'OFF'),
+('FB ADS', 'Restahulu Njsy', 'RESTAHULU05', '', 'OFF'),
+('FB ADS', 'Nirmala ID 03', 'meroket', 'MD', 'OFF'),
+('FB ADS', 'Nirmala ID 03', 'meroket002', '', 'AKUN DI BATASI'),
+('FB ADS', 'Nirmala ID 03', 'meroket003', '', 'AKUN DI BATASI'),
+('GOOGLE ADS', 'EVERPRO', 'EVPO-CVCLICCONIROGAHKG-2', 'MD', 'ON'),
+('GOOGLE ADS', 'OCADEMY', 'SM-CVCLICCONIROGA-1', 'MD', 'ON'),
+('MP - LAZADA', 'tiktokshopeetoko@gmail.com', 'KlinikBioHrebal', 'MD, VC, WJ, KP', 'ON'),
+('MP - SHOPEE', 'tiktokshopeetoko5@gmail.com', 'HERBALVITCORE', 'VC', 'ON'),
+('MP - SHOPEE', 'tiktokshopeetoko@gmail.com', 'Maxdales.herbal', 'MD, VC, WJ, KP', 'ON'),
+('MP - SHOPEE', 'tiktokshopeetoko11@gmail.com', 'lingcare_original_store', '', 'ON'),
+('MP - SHOPEE', 'tiktokshopeetoko10@gmail.com', 'wanjiankang_tokoresmi', 'WJ', 'ON'),
+('MP - TIKTOK TOKOPEDIA', 'tiktokshopeetoko3@gmail.com', 'ApinnStore', 'MD, VC, WJ, KP', 'OFF'),
+('MP - TIKTOK TOKOPEDIA', 'KLINIKBIOHERBAL / OFFCIALMAXDALES', 'EVPO-CVCliccoNirogaHKT-1', 'MD', 'ON'),
+('MP - TIKTOK TOKOPEDIA', 'HERBALVITCORE', 'EVPO-CVCliccoNirogaHKT-2', 'VC', 'ON'),
+('MP - TIKTOK TOKOPEDIA', 'KLINIKBIOHERBAL', 'OCT-001-CLICCO', 'MD', 'ON'),
+('MP - TIKTOK TOKOPEDIA', 'tiktokshopeetoko2@gmail.com', 'TOKOHERBALCHINA', 'MD, VC, WJ, KP', 'OFF'),
+('MP - TIKTOK TOKOPEDIA', 'tiktokshopeetoko@gmail.com', 'TOKOKLIKDOKTER', 'MD, VC, WJ, KP', 'ON'),
+('SNACK ADS', 'OFFICIAL MAXDALES', 'Clicco-01(76482182)', 'MD', 'ON'),
+('SNACK ADS', 'OFFICIAL VITCORE', 'Clicco-02(76482197)', 'VC', 'ON');
+
+-- Idempotent: hapus dulu akun yang ada di daftar migrasi ini,
+-- lalu insert ulang versi final yang sudah dibersihkan.
+DELETE FROM "AdAccount" aa
+USING tmp_ad_accounts_migration t, "SalesSource" ss
+WHERE ss."name" = t.source_name
+  AND aa."sourceId" = ss."id"
+  AND aa."accountName" = t.account_name;
+
+INSERT INTO "AdAccount" (
+  "id",
+  "sourceId",
+  "groupName",
+  "accountName",
+  "productInfo",
+  "status",
+  "createdAt",
+  "updatedAt"
+)
+SELECT
+  gen_random_uuid()::text,
+  ss."id",
+  t.group_name,
+  t.account_name,
+  t.product_info,
+  t.status,
+  NOW(),
+  NOW()
+FROM tmp_ad_accounts_migration t
+JOIN "SalesSource" ss ON ss."name" = t.source_name;
+
+-- Validasi hasil insert untuk daftar migrasi ini
+DO $$
+DECLARE
+  expected_count INT := 62;
+  actual_count INT;
+BEGIN
+  SELECT COUNT(*) INTO actual_count
+  FROM "AdAccount" aa
+  JOIN "SalesSource" ss ON ss."id" = aa."sourceId"
+  JOIN tmp_ad_accounts_migration t
+    ON t.source_name = ss."name"
+   AND t.account_name = aa."accountName";
+
+  IF actual_count <> expected_count THEN
+    RAISE EXCEPTION 'Jumlah AdAccount hasil migrasi tidak sesuai. Expected %, actual %', expected_count, actual_count;
+  END IF;
+END $$;
+
+COMMIT;
+
+-- Query cek setelah sukses:
+-- SELECT ss."name" AS source, COUNT(*) AS total
+-- FROM "AdAccount" aa
+-- JOIN "SalesSource" ss ON ss."id" = aa."sourceId"
+-- WHERE ss."name" IN ('FB ADS','GOOGLE ADS','MP - LAZADA','MP - SHOPEE','MP - TIKTOK TOKOPEDIA','SNACK ADS')
+-- GROUP BY ss."name"
+-- ORDER BY ss."name";

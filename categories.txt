@@ -1,0 +1,24 @@
+                  id                  |             name             |  type   
+--------------------------------------+------------------------------+---------
+ c2d71758-9dc3-4e0d-8d69-bb050d81b701 | PENDAPATAN CUST TF           | INCOME
+ e63d6c6f-4e2e-4994-8356-0dbaafbd34e8 | PENDAPATAN LAIN              | INCOME
+ cccccb1a-f85e-4fe2-a62d-5ef17d58bde5 | PENDAPATAN PENCAIRAN BAC     | INCOME
+ f33464c9-7b3a-426b-aaac-3acee9e23cee | PENDAPATAN PENCAIRAN EVERPRO | INCOME
+ d33da5e2-e5c3-42f0-a7b2-04a0f6d1bc21 | PENDAPATAN PENCAIRAN KA      | INCOME
+ ae6edffd-8c0c-4787-9d86-6e1fb8386afd | PENDAPATAN PENCAIRAN NINJA   | INCOME
+ cc50a914-989c-49da-b7cc-d4ee8f85b6a7 | PENDAPATAN LAZADA            | INCOME
+ d40cec04-b768-45be-a736-780d377229c8 | PENDAPATAN PENCAIRAN OO      | INCOME
+ 6f3d5b49-60d0-4aff-a715-a8e0a78a1de3 | PENDAPATAN SHOPEE            | INCOME
+ b8fef3ae-d1e3-4f0c-aef4-c7a4d423e519 | PENDAPATAN TIK TOK SHOP      | INCOME
+ 0b82dbcf-b754-4758-a105-7dae1f83d849 | PENDAPATAN TOKOPEDIA         | INCOME
+ 92781170-cd85-4617-90d2-7672d47fbcb9 | BEBAN LAIN                   | EXPENSE
+ bb986ece-879c-4cfb-b613-cb0c455997c9 | PIUTANG                      | EXPENSE
+ 8b39cd35-7b7c-4795-b7e9-88433cc9297d | IKLAN                        | EXPENSE
+ 4977c5d9-4525-45a6-805a-09a5a2f10ad7 | HPP                          | EXPENSE
+ c824105b-dd6d-4b90-8984-3f390363beac | BEBAN GAPOK                  | EXPENSE
+ 97dd1170-769f-4574-aea7-b01b93753f7c | MODAL AWAL                   | INCOME
+ 1c3847a9-ee6d-4638-9f78-99e54ddc8e35 | PENAMBAHAN MODAL             | INCOME
+ 823ad50b-d73a-4812-a24f-92ba442e4acc | BEBAN BONUS KARYAWAN         | EXPENSE
+ 909bbee2-94a6-498e-954a-c6c30baf7a8e | PENARIKAN MODAL              | EXPENSE
+(20 rows)
+

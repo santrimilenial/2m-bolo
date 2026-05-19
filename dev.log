@@ -1,0 +1,38 @@
+
+> public_html@0.1.0 dev
+> next dev
+
+ ⚠ Port 3000 is in use, trying 3001 instead.
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3001
+  - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 1583ms
+[?25h
+
+  #  Node.js[150578]: void node::ResetStdio() at ../src/node.cc:751
+  #  Assertion failed: !(err != 0) || (err == -1 && (*__errno_location ()) == 1)
+
+----- Native stack trace -----
+
+ 1: 0xcb5167 node::Assert(node::AssertionInfo const&) [node]
+ 2: 0xc61934  [node]
+ 3: 0x7f8a68641e7d  [/lib64/libc.so.6]
+ 4: 0x7f8a68641fd0  [/lib64/libc.so.6]
+ 5: 0xbc162f node::DefaultProcessExitHandlerInternal(node::Environment*, node::ExitCode) [node]
+ 6: 0xc20f1f node::Environment::Exit(node::ExitCode) [node]
+ 7: 0xf50bdf v8::internal::FunctionCallbackArguments::Call(v8::internal::CallHandlerInfo) [node]
+ 8: 0xf5144d  [node]
+ 9: 0xf51915 v8::internal::Builtin_HandleApiCall(int, unsigned long*, v8::internal::Isolate*) [node]
+10: 0x195e376  [node]
+
+  #  Node.js[150578]: void node::ResetStdio() at ../src/node.cc:751
+  #  Assertion failed: !(err != 0) || (err == -1 && (*__errno_location ()) == 1)
+
+----- Native stack trace -----
+
+ 1: 0xcb5167 node::Assert(node::AssertionInfo const&) [node]
+ 2: 0xc61934  [node]
+ 3: 0xc61f4d node::TrapWebAssemblyOrContinue(int, siginfo_t*, void*) [node]
+ 4: 0x7f8a6863fc30  [/lib64/libc.so.6]
