@@ -24,7 +24,7 @@ const nextConfig = {
       },
     ];
   },
-  poweredBy: false,
+  poweredByHeader: false,
 };
 
 export default nextConfig;

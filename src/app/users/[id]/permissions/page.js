@@ -24,6 +24,7 @@ const availableMenus = [
     { key: "akun-iklan", label: "Daftar Akun Iklan", hasEdit: true },
     { key: "budgeting", label: "Budgeting", hasEdit: true },
     { key: "inventaris", label: "Assets", hasEdit: true },
+    { key: "tasks", label: "Task Management", hasEdit: true },
 ];
 
 export default function PermissionsPage({ params }) {

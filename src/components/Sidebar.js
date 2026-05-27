@@ -21,7 +21,8 @@ import {
     Shield,
     Landmark,
     Megaphone,
-    PieChart
+    PieChart,
+    CheckSquare
 } from "lucide-react";
 
 const SidebarItem = ({ href, icon: Icon, label, active }) => (
@@ -86,6 +87,7 @@ export default function Sidebar() {
         {
             title: "Operations",
             items: [
+                { href: "/tasks", icon: CheckSquare, label: "Task Management", key: "tasks" },
                 { href: "/persediaan", icon: Package, label: "Inventory", key: "persediaan" },
                 { href: "/penjualan", icon: ShoppingCart, label: "Sales Log", key: "penjualan" },
                 { href: "/sales-log-cash", icon: ShoppingCart, label: "Sales Log Cash", key: "sales-log-cash" },
@@ -101,6 +103,7 @@ export default function Sidebar() {
             title: "System Admin",
             items: [
                 { href: "/users", icon: Users, label: "Users", key: "users" },
+                { href: "/monitoring-tasks", icon: Shield, label: "Monitoring Tasks", key: "monitoring-tasks" },
             ]
         });
     }
