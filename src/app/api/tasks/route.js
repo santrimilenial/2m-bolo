@@ -24,6 +24,8 @@ export async function GET(request) {
 
     const { searchParams } = new URL(request.url);
     const targetUserId = searchParams.get("userId");
+    const startDate = searchParams.get("startDate");
+    const endDate = searchParams.get("endDate");
 
     // Default to viewing own tasks
     let filterUserId = payload.sub;
@@ -33,10 +35,19 @@ export async function GET(request) {
       filterUserId = targetUserId;
     }
 
+    const whereClause = {
+      userId: filterUserId,
+    };
+
+    if (startDate && endDate) {
+      whereClause.createdAt = {
+        gte: new Date(startDate),
+        lte: new Date(endDate),
+      };
+    }
+
     const tasks = await prisma.task.findMany({
-      where: {
-        userId: filterUserId,
-      },
+      where: whereClause,
       orderBy: {
         order: 'asc',
       },

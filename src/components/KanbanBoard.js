@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { Plus, MoreHorizontal, Flag, Calendar, AlignLeft, Trash2 } from "lucide-react";
 import { format } from "date-fns";
+import DateRangePicker from "./DateRangePicker";
 
 const STATUSES = {
   OPEN: { label: "OPEN", color: "border-gray-500" },
@@ -18,14 +19,20 @@ export default function KanbanBoard({ targetUserId, readOnly = false }) {
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [editingTaskTitle, setEditingTaskTitle] = useState("");
+  const [dateRange, setDateRange] = useState({ start: null, end: null });
 
   useEffect(() => {
     fetchTasks();
-  }, []);
+  }, [dateRange]);
 
   const fetchTasks = async () => {
     try {
-      const url = targetUserId ? `/api/tasks?userId=${targetUserId}` : "/api/tasks";
+      const params = new URLSearchParams();
+      if (targetUserId) params.append("userId", targetUserId);
+      if (dateRange.start) params.append("startDate", dateRange.start);
+      if (dateRange.end) params.append("endDate", dateRange.end);
+
+      const url = `/api/tasks?${params.toString()}`;
       const res = await fetch(url);
       const data = await res.json();
       setTasks(data);
@@ -234,9 +241,14 @@ export default function KanbanBoard({ targetUserId, readOnly = false }) {
 
   return (
     <div className="min-h-[85vh] bg-transparent overflow-x-auto pb-8">
-      {!targetUserId && (
-        <div className="mb-6 flex justify-between items-center">
+      {!targetUserId ? (
+        <div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <h1 className="text-2xl font-bold text-white tracking-tight">Task Management</h1>
+          <DateRangePicker onFilterChange={setDateRange} initialMode="ALL" allowAll={true} />
+        </div>
+      ) : (
+        <div className="mb-6 flex justify-end">
+          <DateRangePicker onFilterChange={setDateRange} initialMode="ALL" allowAll={true} />
         </div>
       )}
       

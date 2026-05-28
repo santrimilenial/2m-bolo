@@ -4,8 +4,8 @@ import React, { useState, useEffect } from "react";
 import { CalendarRange, CalendarDays, Calendar } from "lucide-react";
 import { getFiscalPeriod, getFiscalYear, getFiscalRange } from "@/lib/fiscalPeriod";
 
-export default function DateRangePicker({ onFilterChange, initialMode = "MONTH", defaultDate = new Date() }) {
-  const [mode, setMode] = useState(initialMode); // "MONTH", "YEAR", "RANGE"
+export default function DateRangePicker({ onFilterChange, initialMode = "MONTH", defaultDate = new Date(), allowAll = false }) {
+  const [mode, setMode] = useState(initialMode); // "ALL", "MONTH", "YEAR", "RANGE"
   const [singleMonth, setSingleMonth] = useState(defaultDate.getMonth() + 1);
   const [singleYear, setSingleYear] = useState(defaultDate.getFullYear());
   
@@ -21,6 +21,11 @@ export default function DateRangePicker({ onFilterChange, initialMode = "MONTH",
 
   // Calculate fiscal period borders and broadcast to parent
   useEffect(() => {
+    if (mode === "ALL") {
+      onFilterChange({ start: null, end: null });
+      return;
+    }
+    
     let start, end;
     if (mode === "MONTH") {
       ({ start, end } = getFiscalPeriod(singleMonth, singleYear));
@@ -33,9 +38,14 @@ export default function DateRangePicker({ onFilterChange, initialMode = "MONTH",
   }, [mode, singleMonth, singleYear, startMonth, startYear, endMonth, endYear]);
 
   return (
-    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 bg-pos-panel border border-pos-border rounded-xl p-2 shadow-lg">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 bg-pos-panel border border-pos-border rounded-xl p-2 shadow-lg w-max">
       {/* Mode Selector */}
       <div className="flex bg-[#0a0e17] rounded-lg p-1 border border-pos-border/50">
+         {allowAll && (
+           <button onClick={() => setMode("ALL")} className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all flex items-center gap-1.5 ${mode === "ALL" ? "bg-pos-accent text-white shadow-md" : "text-white/50 hover:text-white"}`}>
+              <CalendarDays size={14} /> All Data
+           </button>
+         )}
          <button onClick={() => setMode("MONTH")} className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all flex items-center gap-1.5 ${mode === "MONTH" ? "bg-pos-accent text-white shadow-md" : "text-white/50 hover:text-white"}`}>
             <CalendarDays size={14} /> Bulan
          </button>
