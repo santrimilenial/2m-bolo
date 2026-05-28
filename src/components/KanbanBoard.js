@@ -237,12 +237,12 @@ export default function KanbanBoard({ targetUserId, readOnly = false }) {
       )}
       
       <DragDropContext onDragEnd={readOnly ? () => {} : onDragEnd}>
-        <div className="flex gap-6 items-start pb-4">
+        <div className="flex gap-6 items-start pb-4 w-full">
           {Object.entries(STATUSES).map(([statusKey, config]) => {
             const columnTasks = getTasksByStatus(statusKey);
             
             return (
-              <div key={statusKey} className="w-[300px] flex-shrink-0 flex flex-col bg-pos-base rounded-xl border border-pos-border/50 p-4">
+              <div key={statusKey} className="flex-1 min-w-0 flex flex-col bg-pos-base rounded-xl border border-pos-border/50 p-4">
                 {/* Column Header */}
                 <div className={`flex items-center justify-between pb-3 mb-3 border-b-2 ${config.color}`}>
                   <div className="flex items-center gap-2">

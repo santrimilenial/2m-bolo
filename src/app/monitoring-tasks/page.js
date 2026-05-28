@@ -34,7 +34,7 @@ export default function MonitoringTasksPage() {
   };
 
   return (
-    <div className="p-8 pb-32">
+    <div className="p-8 max-w-7xl mx-auto pb-32">
       <div className="flex items-center gap-4 mb-8">
         <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-pos-accent to-purple-500 flex items-center justify-center text-white shadow-neon">
           <Users size={24} />

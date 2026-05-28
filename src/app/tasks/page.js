@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function TasksPage() {
   return (
-    <div className="flex-1 bg-transparent h-full">
+    <div className="flex-1 bg-transparent h-full max-w-7xl mx-auto px-8">
       <KanbanBoard />
     </div>
   );
