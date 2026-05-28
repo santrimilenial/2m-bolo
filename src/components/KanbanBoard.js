@@ -69,6 +69,9 @@ export default function KanbanBoard({ targetUserId, readOnly = false }) {
     
     // Insert into destination list
     draggedTask.status = destination.droppableId;
+    if (destination.droppableId === 'DONE') {
+      draggedTask.progress = 100;
+    }
     destStatusTasks.splice(destination.index, 0, draggedTask);
 
     // Re-calculate orders for the affected columns
@@ -93,6 +96,7 @@ export default function KanbanBoard({ targetUserId, readOnly = false }) {
       id: t.id,
       status: t.status,
       order: t.order,
+      progress: t.progress,
     }));
 
     try {

@@ -108,6 +108,7 @@ export async function PATCH(request) {
         data: {
           status: task.status,
           order: task.order,
+          ...(task.progress !== undefined && { progress: task.progress }),
         },
       })
     );
